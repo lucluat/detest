@@ -11,19 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("http://localhost:8080")
 @RestController
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    //    @GetMapping("/product/getAll")
-//    public Page<ProductResponse> products(@RequestParam("page") int page,
-//                                          @RequestParam("size") int size){
-//        Pageable pageable= PageRequest.of(page,size);
-//        return productService.getAll(pageable);
-//    }
     @GetMapping("")
     public List<ProductResponse> products() {
         return productService.getAll();
@@ -59,9 +53,6 @@ public class ProductController {
     public ProductResponse detail(@PathVariable("id") String string) {
         try {
             Long id = Long.parseLong(string);
-//            if ( id <= 0) {
-//                throw new DataInvalid("Id không hợp lệ");
-//            }
             return productService.detail(id);
         }catch (Exception e){
             throw new DataInvalid("id không hợp lệ");
