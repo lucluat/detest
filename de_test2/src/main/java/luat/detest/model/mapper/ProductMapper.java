@@ -2,7 +2,7 @@ package luat.detest.model.mapper;
 
 import luat.detest.entity.Product;
 import luat.detest.model.request.ProductRequest;
-import luat.detest.response.ProductResponse;
+import luat.detest.model.response.ProductResponse;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -3,7 +3,7 @@ package luat.detest.service.impl;
 import luat.detest.entity.SubCategory;
 import luat.detest.model.mapper.SubCategoryMapper;
 import luat.detest.repository.ISubCategoryRepository;
-import luat.detest.response.SubCategoryResponse;
+import luat.detest.model.response.SubCategoryResponse;
 import luat.detest.service.ISubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

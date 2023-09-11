@@ -13,7 +13,7 @@ import luat.detest.repository.IStatusRepository;
 import luat.detest.repository.ISubCategoryRepository;
 import luat.detest.model.request.ProductRequest;
 import luat.detest.model.request.SearchRequest;
-import luat.detest.response.ProductResponse;
+import luat.detest.model.response.ProductResponse;
 import luat.detest.service.IProductService;
 import luat.detest.utils.common;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +37,7 @@ public class ProductService implements IProductService {
     @Autowired
     private IStatusRepository iStatusRepository;
 
-    //    @Override
-//    public Page<ProductResponse> getAll(Pageable pageable) {
-//        Page<Product> oldPage = iProductRepository.findAll(pageable);
-//        List<Product> products= oldPage.getContent();
-//        List<ProductResponse> productResponses = new ArrayList<>();
-//        for (Product product : products
-//        ) {
-//            productResponses.add(productConvert.toProductResponse(product));
-//        }
-//        Page page= new PageImpl(productResponses,pageable, oldPage.getTotalElements());
-//        return page;
-//    }
+
     @Override
     public List<ProductResponse> getAll() {
         List<Product> productList = iProductRepository.findAll();

@@ -1,6 +1,6 @@
 package luat.detest.restcontroller;
 
-import luat.detest.response.SubCategoryResponse;
+import luat.detest.model.response.SubCategoryResponse;
 import luat.detest.service.impl.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

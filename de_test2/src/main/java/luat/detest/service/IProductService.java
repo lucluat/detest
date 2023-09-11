@@ -2,7 +2,7 @@ package luat.detest.service;
 
 import luat.detest.model.request.ProductRequest;
 import luat.detest.model.request.SearchRequest;
-import luat.detest.response.ProductResponse;
+import luat.detest.model.response.ProductResponse;
 
 import java.util.List;
 

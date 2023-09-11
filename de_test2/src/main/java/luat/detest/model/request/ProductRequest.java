@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import luat.detest.response.AbstractResponse;
+import luat.detest.model.response.AbstractResponse;
 
 @Setter
 @Getter

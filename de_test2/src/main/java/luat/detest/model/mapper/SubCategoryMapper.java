@@ -1,7 +1,7 @@
 package luat.detest.model.mapper;
 
 import luat.detest.entity.SubCategory;
-import luat.detest.response.SubCategoryResponse;
+import luat.detest.model.response.SubCategoryResponse;
 import org.springframework.stereotype.Component;
 
 @Component

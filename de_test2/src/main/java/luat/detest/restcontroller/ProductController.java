@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import luat.detest.exception.DataInvalid;
 import luat.detest.model.request.ProductRequest;
 import luat.detest.model.request.SearchRequest;
-import luat.detest.response.ProductResponse;
+import luat.detest.model.response.ProductResponse;
 import luat.detest.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
