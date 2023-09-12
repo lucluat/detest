@@ -15,10 +15,10 @@ import luat.detest.model.response.AbstractResponse;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest extends AbstractResponse {
-
+    private Long id;
     @NotEmpty
     @NotNull
-    private String produceName;
+    private String productName;
 
     @NotEmpty
     @NotNull
@@ -34,15 +34,14 @@ public class ProductRequest extends AbstractResponse {
     @Min(value = 0,message = " orginPrice >= 0")
     private Double orginPrice;
 
-    private String description;
 
-    @Min(value = 0,message = "subCategoryId >= 0")
+    @Min(value = 1,message = "subCategoryId >= 1")
     private Long subCategoryId;
     @NotNull
-    @Max(value = 1,message = "statusId <=1")
-    @Min(value = 0,message = "statusId >= 0")
+    @Max(value = 2,message = "statusId <=2")
+    @Min(value = 1,message = "statusId >= 1")
     private Long statusId;
     @NotNull
-    @Min(value = 0,message = "brandId >= 0")
+    @Min(value = 1,message = "brandId >= 1")
     private Long brandId;
 }

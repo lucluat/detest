@@ -3,28 +3,38 @@ package luat.detest.model.mapper;
 import luat.detest.entity.Product;
 import luat.detest.model.request.ProductRequest;
 import luat.detest.model.response.ProductResponse;
+import luat.detest.model.response.StatusResponse;
+import luat.detest.model.response.SubCategoryResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
 
+    @Autowired
+    private BrandMapper brandMapper;
+    @Autowired
+    private SubCategoryMapper subCategoryMapper;
+    @Autowired
+    private StatusMapper statusMapper;
+
     public ProductResponse toProductResponse(Product product) {
         ProductResponse productResponse = new ProductResponse();
         productResponse.setId(product.getId());
-        productResponse.setProduceName(product.getProduceName());
-        productResponse.setBrandName(product.getBrands().size()>0?product.getBrands().get(0).getBrandName():null);
-        productResponse.setPrice(product.getSellPrice());
-        productResponse.setStatus(product.getStatus().getStatusName());
-        productResponse.setSubCategory(product.getSubCategory().getSubCateName());
+        productResponse.setProductName(product.getProduceName());
+        productResponse.setBrand(product.getBrands().size()>0?brandMapper.toResponse(product.getBrands().get(0)):null);
+        productResponse.setSellPrice(product.getSellPrice());
+        productResponse.setStatus(statusMapper.toResponse(product.getStatus()));
+        productResponse.setSubCategory(subCategoryMapper.toResponse(product.getSubCategory()));
+        productResponse.setOrginPrice(product.getOrginPrice());
+        productResponse.setColor(product.getColor());
+        productResponse.setQuantity(product.getQuantity());
         return productResponse;
     }
 
-    public Product toProduc(ProductRequest productResponse) {
+    public Product toProduct(ProductRequest productResponse) {
         Product product = new Product();
-        if (productResponse.getId() != null) {
-            product.setId(productResponse.getId());
-        }
-        product.setProduceName(productResponse.getProduceName());
+        product.setProduceName(productResponse.getProductName());
         product.setColor(productResponse.getColor());
         product.setOrginPrice(productResponse.getOrginPrice());
         product.setQuantity(productResponse.getQuantity());
@@ -37,11 +47,8 @@ public class ProductMapper {
         if (productResponse.getId() != null) {
             product.setId(productResponse.getId());
         }
-        product.setProduceName(productResponse.getProduceName());
+        product.setProduceName(productResponse.getProductName());
         product.setColor(productResponse.getColor());
-        if (product.getDescription() != null) {
-            productResponse.setDescription(productResponse.getDescription());
-        }
         product.setOrginPrice(productResponse.getOrginPrice());
         product.setQuantity(productResponse.getQuantity());
         product.setSellPrice(productResponse.getSellPrice());

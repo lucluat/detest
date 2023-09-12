@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IProductService {
 
-    List<ProductResponse> getAll();
+    List<ProductResponse> findAll();
 
     ProductResponse createOrUpdate(ProductRequest productResponse);
 

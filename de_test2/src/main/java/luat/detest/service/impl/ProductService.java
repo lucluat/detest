@@ -39,7 +39,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public List<ProductResponse> getAll() {
+    public List<ProductResponse> findAll() {
         List<Product> productList = iProductRepository.findAll();
         List<ProductResponse> productResponses = new ArrayList<>();
         for (Product product : productList
@@ -50,25 +50,25 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductResponse createOrUpdate(ProductRequest productResponse) {
+    public ProductResponse createOrUpdate(ProductRequest productRequest) {
         Product product;
-        if (productResponse.getId() != null) {
-            Optional<Product> optional = iProductRepository.findById(productResponse.getId());
+        if (productRequest.getId() != null) {
+            Optional<Product> optional = iProductRepository.findById(productRequest.getId());
             Product oldProduct;
             if (optional.isPresent()) {
                 oldProduct = optional.get();
-                product = productConvert.toProduc(productResponse, oldProduct);
+                product = productConvert.toProduc(productRequest, oldProduct);
             } else {
 //                throw new DataInvalid("data invalid");
-                product = productConvert.toProduc(productResponse);
+                product = productConvert.toProduct(productRequest);
             }
         } else {
-            product = productConvert.toProduc(productResponse);
+            product = productConvert.toProduct(productRequest);
         }
-        Optional<SubCategory> subCategory = iSubCategoryRepository.findById(productResponse.getSubCategoryId());
-        Optional<Status> statusOptional = iStatusRepository.findById(productResponse.getStatusId());
-        Optional<Brand> optionalBrand = iBrandRepository.findById(productResponse.getBrandId());
-        if (common.isPresent(subCategory, statusOptional, optionalBrand)) {
+        Optional<SubCategory> subCategory = iSubCategoryRepository.findById(productRequest.getSubCategoryId());
+        Optional<Status> statusOptional = iStatusRepository.findById(productRequest.getStatusId());
+        Optional<Brand> optionalBrand = iBrandRepository.findById(productRequest.getBrandId());
+        if (!common.isPresent(subCategory, statusOptional, optionalBrand)) {
             throw new DataInvalid("data invalid");
         }
         product.setSubCategory(subCategory.get());

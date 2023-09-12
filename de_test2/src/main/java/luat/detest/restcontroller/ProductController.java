@@ -8,6 +8,7 @@ import luat.detest.model.response.ProductResponse;
 import luat.detest.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,22 +20,26 @@ public class ProductController {
 
     @GetMapping("")
     public List<ProductResponse> products() {
-        return productService.getAll();
+        return productService.findAll();
     }
 
     @PostMapping("/post")
     public ProductResponse addProduct(@RequestBody @Valid ProductRequest productRequest, BindingResult error) {
         if (error.hasErrors()) {
-            System.out.println("lỗi");
             throw new DataInvalid("data invalid");
         }
-        System.out.println("lỗi 2");
         return productService.createOrUpdate(productRequest);
     }
 
     @PutMapping("/put")
-    public ProductResponse update(@RequestBody @Valid ProductRequest productResponse, BindingResult error) {
+    public ProductResponse update(@RequestBody @Valid ProductRequest productResponse,
+                                  BindingResult error) {
         if (error.hasErrors()) {
+            for (FieldError er : error.getFieldErrors()) {
+                String fieldName = er.getField();
+                String errorMessage = er.getDefaultMessage();
+                System.out.println("Lỗi ở fiel '" + fieldName + "': " + errorMessage);
+            }
             throw new DataInvalid("data invalid");
         }
         return productService.createOrUpdate(productResponse);
