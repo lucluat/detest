@@ -17,6 +17,7 @@ import luat.detest.model.response.ProductResponse;
 import luat.detest.service.IProductService;
 import luat.detest.utils.common;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -94,15 +95,25 @@ public class ProductService implements IProductService {
         List<Product> products = iProductRepository.findAll();
         List<Product> listFilter = products.stream()
                 .filter(item ->
-                        (searchRequest.getProduceName() == null || item.getProduceName().trim().contains(searchRequest.getProduceName())) &&
+                        (searchRequest.getProductName() == null || item.getProduceName().trim().contains(searchRequest.getProductName())) &&
                                 (searchRequest.getSellPrice() == null || item.getSellPrice().equals(searchRequest.getSellPrice())) &&
                                 (item.getBrands().size() > 0 && item.getBrands().get(0).getId().equals(searchRequest.getBrandId())) &&
                                 (item.getSubCategory().getId().equals(searchRequest.getSubCategoryId())) &&
-                                (item.getStatus().getId().equals(searchRequest.getStatusId())))
+                                (item.getStatus().getId().equals(searchRequest.getStatusId()))
+                )
                 .collect(Collectors.toList());
         for (Product product : listFilter) {
             productResponses.add(productConvert.toProductResponse(product));
         }
         return productResponses;
+    }
+
+    @Override
+    public List<ProductResponse> del(Long id) {
+        if (iProductRepository.existsById(id)) {
+            iProductRepository.deleteById(id);
+            return this.findAll();
+        }
+        throw new DataInvalid("không có product có id:"+id);
     }
 }

@@ -53,7 +53,7 @@ public class ProductController {
         return productService.search(searchRequest);
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/{id}")
     public ProductResponse detail(@PathVariable("id") String string) {
         try {
             Long id = Long.parseLong(string);
@@ -61,7 +61,10 @@ public class ProductController {
         }catch (Exception e){
             throw new DataInvalid("id không hợp lệ");
         }
-
     }
 
+    @DeleteMapping ("/{id}")
+    public List<ProductResponse> del(@PathVariable("id")Long id){
+        return productService.del(id);
+    }
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchRequest {
-    private String produceName;
+    private String productName;
 
     @Min(value = 0,message = "sellPrice >= 0")
     private Double sellPrice;
@@ -26,7 +26,7 @@ public class SearchRequest {
     @Override
     public String toString() {
         return "SearchRequest{" +
-                "produceName=" + produceName  +
+                "produceName=" + productName  +
                 ", sellPrice=" + sellPrice +
                 ", brandId=" + brandId +
                 ", subCategoryId=" + subCategoryId +
