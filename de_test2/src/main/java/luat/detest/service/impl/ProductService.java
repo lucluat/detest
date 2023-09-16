@@ -1,5 +1,6 @@
 package luat.detest.service.impl;
 
+import jakarta.transaction.Transactional;
 import luat.detest.entity.Brand;
 import luat.detest.entity.Product;
 import luat.detest.entity.Status;
@@ -60,8 +61,7 @@ public class ProductService implements IProductService {
                 oldProduct = optional.get();
                 product = productConvert.toProduc(productRequest, oldProduct);
             } else {
-//                throw new DataInvalid("data invalid");
-                product = productConvert.toProduct(productRequest);
+                 product = productConvert.toProduct(productRequest);
             }
         } else {
             product = productConvert.toProduct(productRequest);
@@ -72,6 +72,7 @@ public class ProductService implements IProductService {
         if (!common.isPresent(subCategory, statusOptional, optionalBrand)) {
             throw new DataInvalid("data invalid");
         }
+
         product.setSubCategory(subCategory.get());
         product.setStatus(statusOptional.get());
         List<Brand> brands = new ArrayList<>();

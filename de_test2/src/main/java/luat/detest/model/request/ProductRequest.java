@@ -17,7 +17,6 @@ import luat.detest.model.response.AbstractResponse;
 public class ProductRequest extends AbstractResponse {
     private Long id;
     @NotEmpty
-    @NotNull
     private String productName;
 
     @NotEmpty
